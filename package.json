@@ -1,6 +1,6 @@
 {
   "name": "@error-explorer/node-error-reporter",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Node.js SDK for Error Explorer - Capture and report errors automatically",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
