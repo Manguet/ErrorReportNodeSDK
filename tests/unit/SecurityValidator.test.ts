@@ -363,7 +363,7 @@ describe('SecurityValidator', () => {
 
     it('should detect API keys', () => {
       const testCases = [
-        'API_KEY: sk_test_4eC39HqLyjWDarjtT1zdp7dc',
+        'API_KEY: Switch_this_key_12345',
         'api-key: AIzaSyDXXXXXXXXXXXXXXXXXXXX',
         'ApiKey: pk_live_XXXXXXXXXXXXXXXXXXXXXXXX',
       ];
