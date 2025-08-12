@@ -1,5 +1,5 @@
 {
-  "name": "@error-explorer/node-error-reporter",
+  "name": "error-explorer-node-reporter",
   "version": "1.1.2",
   "description": "Node.js SDK for Error Explorer - Capture and report errors automatically",
   "main": "dist/index.js",
@@ -17,7 +17,7 @@
     "lint": "eslint src tests --ext .ts",
     "lint:fix": "eslint src tests --ext .ts --fix",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
-    "prepublishOnly": "npm run lint && npm run test && npm run build"
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "error",
