@@ -16,5 +16,10 @@ export declare class CircuitBreaker {
     getState(): CircuitBreakerState;
     getFailureCount(): number;
     reset(): void;
+    getStats(): {
+        state: CircuitBreakerState;
+        failureCount: number;
+        lastFailureTime: number;
+    };
 }
 //# sourceMappingURL=CircuitBreaker.d.ts.map

@@ -83,4 +83,30 @@ export class BreadcrumbManager {
       data,
     });
   }
+
+  // Alias methods for compatibility
+  logNavigation(from: string, to: string): void {
+    this.addNavigation(from, to);
+  }
+
+  logUserAction(action: string, data?: Record<string, any>): void {
+    this.addBreadcrumb({
+      message: `User action: ${action}`,
+      category: 'user',
+      level: 'info',
+      data,
+    });
+  }
+
+  logHttpRequest(method: string, url: string, statusCode?: number): void {
+    this.addHttpRequest(method, url, statusCode);
+  }
+
+  clearBreadcrumbs(): void {
+    this.clear();
+  }
+
+  getMaxBreadcrumbs(): number {
+    return this.maxBreadcrumbs;
+  }
 }

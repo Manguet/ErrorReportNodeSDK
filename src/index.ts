@@ -1,5 +1,14 @@
 import { ErrorReporter } from './services/ErrorReporter';
 import { BreadcrumbManager } from './services/BreadcrumbManager';
+import { CircuitBreaker } from './services/CircuitBreaker';
+import { OfflineQueue } from './services/OfflineQueue';
+import { RateLimiter } from './services/RateLimiter';
+import { QuotaManager } from './services/QuotaManager';
+import { RetryManager } from './services/RetryManager';
+import { SDKMonitor } from './services/SDKMonitor';
+import { SecurityValidator } from './services/SecurityValidator';
+import { BatchManager } from './services/BatchManager';
+import { CompressionService } from './services/CompressionService';
 import { ErrorExplorerConfig, ErrorData, UserContext, Breadcrumb, ExpressOptions } from './types';
 import {
   createExpressErrorHandler,
@@ -16,6 +25,10 @@ export class ErrorExplorer {
     ErrorExplorer.instance = new ErrorReporter(config);
     _globalErrorReporter = ErrorExplorer.instance;
     return ErrorExplorer.instance;
+  }
+
+  static configure(config: ErrorExplorerConfig): ErrorReporter {
+    return ErrorExplorer.init(config);
   }
 
   static getInstance(): ErrorReporter | null {
@@ -103,6 +116,15 @@ export function setupExpress(app: any, options?: ExpressOptions): void {
 export {
   ErrorReporter,
   BreadcrumbManager,
+  CircuitBreaker,
+  OfflineQueue,
+  RateLimiter,
+  QuotaManager,
+  RetryManager,
+  SDKMonitor,
+  SecurityValidator,
+  BatchManager,
+  CompressionService,
   createExpressErrorHandler,
   createExpressRequestLogger,
   setupExpressIntegration,

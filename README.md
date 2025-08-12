@@ -60,16 +60,23 @@ process.on('unhandledRejection', ErrorExplorer.captureException);
 
 ```javascript
 const express = require('express');
-const ErrorExplorer = require('@error-explorer/node');
+const { ErrorExplorer } = require('@error-explorer/node');
 
 const app = express();
 
-// Initialize ErrorExplorer
-const errorReporter = ErrorExplorer.init({
+// Initialize ErrorExplorer (two ways available)
+ErrorExplorer.init({
   webhookUrl: process.env.ERROR_EXPLORER_WEBHOOK_URL,
   projectName: 'my-express-app',
   environment: process.env.NODE_ENV,
 });
+
+// Alternative: using configure() method (alias for init())
+// ErrorExplorer.configure({
+//   webhookUrl: process.env.ERROR_EXPLORER_WEBHOOK_URL,
+//   projectName: 'my-express-app',
+//   environment: process.env.NODE_ENV,
+// });
 
 // Setup automatic Express integration
 ErrorExplorer.setupExpress(app, {
@@ -82,6 +89,11 @@ ErrorExplorer.setupExpress(app, {
 // Your routes here
 app.get('/', (req, res) => {
   res.send('Hello World!');
+});
+
+// Error route for testing
+app.get('/error/test', (req, res) => {
+  throw new Error('Test error from Node Express');
 });
 
 // Start server
@@ -294,6 +306,10 @@ ErrorExplorer.setupExpress(app, {
 ### ErrorExplorer.init(config)
 
 Initializes the Error Explorer SDK.
+
+### ErrorExplorer.configure(config)
+
+Alias for `ErrorExplorer.init(config)`. Both methods work identically.
 
 ### ErrorExplorer.captureException(error, context?)
 

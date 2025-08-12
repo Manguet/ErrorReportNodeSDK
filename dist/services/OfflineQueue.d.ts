@@ -27,5 +27,13 @@ export declare class OfflineQueue {
     private loadQueue;
     private saveQueue;
     private generateId;
+    add(data: ErrorData): void;
+    setSendFunction(sendFn: (data: ErrorData) => Promise<void>): void;
+    private sendFunction?;
+    flush(): Promise<void>;
+    getStats(): {
+        queueSize: number;
+        oldestItem: number | null;
+    };
 }
 //# sourceMappingURL=OfflineQueue.d.ts.map

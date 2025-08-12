@@ -127,6 +127,39 @@ class OfflineQueue {
     generateId() {
         return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     }
+    add(data) {
+        this.enqueue(data);
+    }
+    setSendFunction(sendFn) {
+        this.sendFunction = sendFn;
+    }
+    async flush() {
+        if (!this.sendFunction || this.isProcessing) {
+            return;
+        }
+        this.isProcessing = true;
+        const itemsToProcess = [...this.queue];
+        for (const item of itemsToProcess) {
+            try {
+                await this.sendFunction(item.data);
+                this.queue = this.queue.filter(q => q.id !== item.id);
+            }
+            catch (error) {
+                item.attempts++;
+                if (item.attempts >= this.maxRetries) {
+                    this.queue = this.queue.filter(q => q.id !== item.id);
+                }
+            }
+        }
+        this.saveQueue();
+        this.isProcessing = false;
+    }
+    getStats() {
+        return {
+            queueSize: this.queue.length,
+            oldestItem: this.queue.length > 0 ? this.queue[0].timestamp : null
+        };
+    }
 }
 exports.OfflineQueue = OfflineQueue;
 //# sourceMappingURL=OfflineQueue.js.map

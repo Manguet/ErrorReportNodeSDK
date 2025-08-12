@@ -75,4 +75,17 @@ export class RateLimiter {
 
     this.requests = this.requests.filter(req => req.timestamp > cutoff);
   }
+
+  getStats(): { 
+    remainingRequests: number; 
+    resetTime: number; 
+    currentRequests: number 
+  } {
+    this.cleanExpiredRequests();
+    return {
+      remainingRequests: this.getRemainingRequests(),
+      resetTime: this.getResetTime(),
+      currentRequests: this.requests.length
+    };
+  }
 }

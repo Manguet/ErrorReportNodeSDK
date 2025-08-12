@@ -135,4 +135,48 @@ export class OfflineQueue {
   private generateId(): string {
     return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
   }
+
+  // Alias methods for compatibility
+  add(data: ErrorData): void {
+    this.enqueue(data);
+  }
+
+  setSendFunction(sendFn: (data: ErrorData) => Promise<void>): void {
+    // Store the send function for processing queue
+    this.sendFunction = sendFn;
+  }
+
+  private sendFunction?: (data: ErrorData) => Promise<void>;
+
+  async flush(): Promise<void> {
+    if (!this.sendFunction || this.isProcessing) {
+      return;
+    }
+
+    this.isProcessing = true;
+    const itemsToProcess = [...this.queue];
+    
+    for (const item of itemsToProcess) {
+      try {
+        await this.sendFunction(item.data);
+        // Remove successful item from queue
+        this.queue = this.queue.filter(q => q.id !== item.id);
+      } catch (error) {
+        item.attempts++;
+        if (item.attempts >= this.maxRetries) {
+          this.queue = this.queue.filter(q => q.id !== item.id);
+        }
+      }
+    }
+    
+    this.saveQueue();
+    this.isProcessing = false;
+  }
+
+  getStats(): { queueSize: number; oldestItem: number | null } {
+    return {
+      queueSize: this.queue.length,
+      oldestItem: this.queue.length > 0 ? this.queue[0].timestamp : null
+    };
+  }
 }

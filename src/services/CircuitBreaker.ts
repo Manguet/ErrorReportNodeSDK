@@ -76,4 +76,16 @@ export class CircuitBreaker {
     this.failureCount = 0;
     this.lastFailureTime = 0;
   }
+
+  getStats(): {
+    state: CircuitBreakerState;
+    failureCount: number;
+    lastFailureTime: number;
+  } {
+    return {
+      state: this.state,
+      failureCount: this.failureCount,
+      lastFailureTime: this.lastFailureTime
+    };
+  }
 }

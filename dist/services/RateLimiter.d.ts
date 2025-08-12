@@ -14,5 +14,10 @@ export declare class RateLimiter {
     getResetTime(): number;
     reset(): void;
     private cleanExpiredRequests;
+    getStats(): {
+        remainingRequests: number;
+        resetTime: number;
+        currentRequests: number;
+    };
 }
 //# sourceMappingURL=RateLimiter.d.ts.map

@@ -72,6 +72,26 @@ class BreadcrumbManager {
             data,
         });
     }
+    logNavigation(from, to) {
+        this.addNavigation(from, to);
+    }
+    logUserAction(action, data) {
+        this.addBreadcrumb({
+            message: `User action: ${action}`,
+            category: 'user',
+            level: 'info',
+            data,
+        });
+    }
+    logHttpRequest(method, url, statusCode) {
+        this.addHttpRequest(method, url, statusCode);
+    }
+    clearBreadcrumbs() {
+        this.clear();
+    }
+    getMaxBreadcrumbs() {
+        return this.maxBreadcrumbs;
+    }
 }
 exports.BreadcrumbManager = BreadcrumbManager;
 //# sourceMappingURL=BreadcrumbManager.js.map

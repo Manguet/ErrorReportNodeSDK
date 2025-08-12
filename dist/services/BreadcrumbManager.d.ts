@@ -11,5 +11,10 @@ export declare class BreadcrumbManager {
     addQuery(query: string, duration?: number): void;
     addNavigation(from: string, to: string): void;
     addCustom(message: string, data?: Record<string, any>): void;
+    logNavigation(from: string, to: string): void;
+    logUserAction(action: string, data?: Record<string, any>): void;
+    logHttpRequest(method: string, url: string, statusCode?: number): void;
+    clearBreadcrumbs(): void;
+    getMaxBreadcrumbs(): number;
 }
 //# sourceMappingURL=BreadcrumbManager.d.ts.map

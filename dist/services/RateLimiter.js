@@ -51,6 +51,14 @@ class RateLimiter {
         const cutoff = now - this.options.windowMs;
         this.requests = this.requests.filter(req => req.timestamp > cutoff);
     }
+    getStats() {
+        this.cleanExpiredRequests();
+        return {
+            remainingRequests: this.getRemainingRequests(),
+            resetTime: this.getResetTime(),
+            currentRequests: this.requests.length
+        };
+    }
 }
 exports.RateLimiter = RateLimiter;
 //# sourceMappingURL=RateLimiter.js.map

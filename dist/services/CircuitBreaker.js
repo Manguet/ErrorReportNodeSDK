@@ -61,6 +61,13 @@ class CircuitBreaker {
         this.failureCount = 0;
         this.lastFailureTime = 0;
     }
+    getStats() {
+        return {
+            state: this.state,
+            failureCount: this.failureCount,
+            lastFailureTime: this.lastFailureTime
+        };
+    }
 }
 exports.CircuitBreaker = CircuitBreaker;
 //# sourceMappingURL=CircuitBreaker.js.map
