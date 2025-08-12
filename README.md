@@ -17,13 +17,13 @@ No breaking changes! All existing code continues to work. New features are opt-i
 ```javascript
 // v1.0.x - still works
 ErrorExplorer.init({
-  webhookUrl: 'https://...',
+  webhookUrl: 'https://error-explorer.com',
   projectName: 'my-app'
 });
 
 // v1.1.0 - enhanced with custom error handling
 ErrorExplorer.init({
-  webhookUrl: 'https://...',
+  webhookUrl: 'https://error-explorer.com',
   projectName: 'my-app',
   onError: (error, context) => myLogger.error('ErrorExplorer failed:', error),
   onWarning: (message, context) => myLogger.warn('ErrorExplorer:', message)

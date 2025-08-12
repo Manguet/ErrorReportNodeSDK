@@ -24,7 +24,7 @@ describe('EnhancedErrorReporter', () => {
   let mockAxiosInstance: jest.Mocked<any>;
 
   const defaultConfig = {
-    webhookUrl: 'https://api.error-explorer.com/webhook',
+    webhookUrl: 'https://error-explorer.com/webhook',
     projectName: 'test-project',
     environment: 'test',
     quota: {
@@ -101,7 +101,7 @@ describe('EnhancedErrorReporter', () => {
 
     it('should initialize without optional services when disabled', () => {
       const minimalConfig = {
-        webhookUrl: 'https://api.error-explorer.com/webhook',
+        webhookUrl: 'https://error-explorer.com/webhook',
         projectName: 'test-project',
       };
 
@@ -386,7 +386,7 @@ describe('EnhancedErrorReporter', () => {
 
     it('should validate configuration without security validator', () => {
       const basicReporter = new EnhancedErrorReporter({
-        webhookUrl: 'https://api.error-explorer.com/webhook',
+        webhookUrl: 'https://error-explorer.com/webhook',
         projectName: 'test-project',
       });
 

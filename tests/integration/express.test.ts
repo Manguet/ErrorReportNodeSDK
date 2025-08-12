@@ -28,7 +28,7 @@ describe.skip('Express Integration', () => {
     mockedAxios.create = jest.fn().mockReturnValue(mockAxiosInstance);
 
     errorReporter = new ErrorReporter({
-      webhookUrl: 'https://test.error-explorer.com',
+      webhookUrl: 'https://error-explorer.com',
       projectName: 'express-test',
       environment: 'test',
       enabled: true,
@@ -123,7 +123,7 @@ describe.skip('Express Integration', () => {
 
     it('should not report when disabled', async () => {
       const disabledReporter = new ErrorReporter({
-        webhookUrl: 'https://test.error-explorer.com',
+        webhookUrl: 'https://error-explorer.com',
         projectName: 'express-test',
         environment: 'test',
         enabled: false,

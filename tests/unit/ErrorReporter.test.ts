@@ -15,7 +15,7 @@ describe('ErrorReporter', () => {
   let mockAxiosInstance: any;
 
   const defaultConfig: ErrorExplorerConfig = {
-    webhookUrl: 'https://test.error-explorer.com',
+    webhookUrl: 'https://error-explorer.com',
     projectName: 'test-project',
     environment: 'test',
     enabled: true,
